@@ -1,5 +1,4 @@
 #include "events.hpp"
-#include <SFML/Window/Event.hpp>
 
 bool pendingEvents(sf::Window& window, sf::Event& event) {
 	return window.pollEvent(event);

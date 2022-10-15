@@ -1,6 +1,4 @@
-#include <SFML/Window.hpp>
-#include <SFML/Window/Event.hpp>
-#include "events.hpp"
+#include "events/events.hpp"
 
 int main() {
 	sf::Window window;
