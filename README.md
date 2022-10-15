@@ -1,5 +1,17 @@
-# exame-ces11
+# Compilation
 
-This repository is intended to expose the final project of the CES11 discipline at ITA - Aeronautics Institute of Technology.
+The project was developed with the possibilities of using CMake or just a Makefile to compile it. In order to do that, choose one of the possibilities and execute the command specified.
 
-In order to compile and run it, you must run `make all && make run` in the root of the project.
+## Makefile
+
+Type the command `make all` in the root of the project.
+
+## CMake
+
+Execute the script `install.sh` with the command `./install.sh` in the root of the project.
+
+Obs: the CMakeLists.txt file was made only for the use of graphics, window and system modules. 
+
+# Running
+
+Execute the script `Exam` with the command `./Exam` in the root of the project.
