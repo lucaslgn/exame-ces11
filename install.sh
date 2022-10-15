@@ -4,5 +4,5 @@ mkdir build
 cd build
 cmake ..
 make -j 4
-mv Exame ../
+mv Exam ../
 cd ..
