@@ -10,7 +10,7 @@ Type the command `make all` in the root of the project.
 
 Run the script `install.sh` with the command `./install.sh` in the root of the project.
 
-Obs: the CMakeLists.txt file was made only for the use of graphics, window and system modules. 
+P.S.: The CMakeLists.txt file was made only for the use of graphics, window and system modules. If the script doesn't have permission to be executed, run the command `chmod u+x install.sh`.
 
 # Running
 
