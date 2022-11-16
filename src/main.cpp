@@ -7,10 +7,9 @@
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800, 1000), "Exam");
-	std::vector<Player> entities;
-	readEntities(entities, "entities.txt");
+	Player player;
 	Map gameMap;
-	if (!readMap(gameMap, "map.txt"))
+	if (!readMap(gameMap, "map.txt", "map.png"))
 		throw std::runtime_error{"couldn't load map"};
 
 	while (window.isOpen()) {
