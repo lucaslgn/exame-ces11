@@ -8,8 +8,8 @@ void treatEvents(sf::Window& window, const sf::Event& event, Player player) {
 		window.close();
 	} else if (mouseClicked(event)) {
 		//TODO
-		std::vector way = dijkstra();
-		player.walk(way);
+		//std::vector way = dijkstra();
+		//player.walk(way);
 	}
 }
 bool mouseClicked(const sf::Event& event) {
