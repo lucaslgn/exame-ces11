@@ -2,26 +2,26 @@
 #include <fstream>
 #include <cmath>
 
-double distance(Tile tile1, Tile tile2) {
-    auto deltax = tile1.x - tile2.x;
-    auto deltay = tile1.y - tile2.y;
+double distance(Position pos1, Position pos2) {
+    auto deltax = pos1.x - pos2.x;
+    auto deltay = pos1.y - pos2.y;
     return std::sqrt(deltax * deltax + deltay * deltay);
 }
 
 bool Map::readMap(const std::string &tilesFile, const std::string &imageFile) {
     std::ifstream is(tilesFile);
     std::size_t order;
-    if(!(is >> order))
+    if (!(is >> order))
         return false;
     tilesGraph_ = Graph(order);
     tiles_.resize(order);
-    for (auto & tile : tiles_) {
-        if(!(is >> tile.x >> tile.y))
+    for (auto &tile: tiles_) {
+        if (!(is >> tile.x >> tile.y))
             return false;
     }
     std::size_t from, to;
     while (is >> from >> to) {
-        tilesGraph_.add_edge(from, to);
+        tilesGraph_.add_edge(from, to, distance(tiles_[from], tiles_[to]));
     }
 
     if (!backgroundImage_.loadFromFile(imageFile))
@@ -31,15 +31,13 @@ bool Map::readMap(const std::string &tilesFile, const std::string &imageFile) {
     return true;
 }
 
-void Map::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    target.draw(background_, states);
+void Map::drawEdges(sf::RenderTarget &target, sf::RenderStates states) const {
     for (std::size_t tileIndex = 0; tileIndex < tilesGraph_.order(); ++tileIndex) {
         auto tile = tiles_[tileIndex];
-        for (const auto & neighborIndex: tilesGraph_.neighbors(tileIndex)) {
-            if (neighborIndex > tileIndex)
+        for (const auto &edge: tilesGraph_.edgesFrom(tileIndex)) {
+            if (edge.destination > tileIndex)
                 break;
-            auto neighbor = tiles_[neighborIndex];
+            auto neighbor = tiles_[edge.destination];
             sf::VertexArray line(sf::Lines, 2);
             line[0].position = sf::Vector2f(tile.x, tile.y);
             line[0].color = sf::Color::Red;
@@ -48,12 +46,45 @@ void Map::draw(sf::RenderTarget& target, sf::RenderStates states) const
             target.draw(line, states);
         }
     }
+}
+
+void Map::drawTiles(sf::RenderTarget &target, sf::RenderStates states) const {
     float radius = 5;
     sf::CircleShape circle(radius);
     circle.setOutlineThickness(1.f);
     circle.setFillColor(sf::Color(50, 100, 150));
-    for (const auto &tile : tiles_) {
+    for (const auto &tile: tiles_) {
         circle.setPosition(tile.x - radius, tile.y - radius);
         target.draw(circle, states);
     }
+}
+
+void Map::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(background_, states);
+    drawEdges(target, states);
+    drawTiles(target, states);
+}
+
+std::size_t Map::closestTile(Position pos) const {
+    double minDistance = std::numeric_limits<double>::max();
+    std::size_t closestIndex = tilesGraph_.order();
+    for (std::size_t tileIndex = 0; tileIndex < tilesGraph_.order(); ++tileIndex) {
+        double dist = distance(tiles_[tileIndex], pos);
+        if (dist < minDistance) {
+            minDistance = dist;
+            closestIndex = tileIndex;
+        }
+    }
+    if (closestIndex < tilesGraph_.order()) {
+        return closestIndex;
+    }
+    throw std::runtime_error("invalid closest tile"); // Acontece quando tiles_ está vazio, por exemplo
+}
+
+Position Map::tilePosition(std::size_t tileIndex) const {
+    return tiles_[tileIndex];
+}
+
+std::vector<std::size_t> Map::shortestPath(std::size_t from, std::size_t to) const {
+    return tilesGraph_.dijkstra(from, to);
 }

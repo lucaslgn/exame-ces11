@@ -3,24 +3,33 @@
 
 // Lista de adjacências
 // Sem arestas múltiplas
-// Sem peso nas arestas
+// Com peso nas arestas (por padrão é 1)
+
+struct Edge {
+    std::size_t destination;
+    double weight;
+};
+
 class Graph {
 public:
     Graph(std::size_t n);
 
-    bool edge_exists(std::size_t from, std::size_t to) const;
-    void add_edge(std::size_t from, std::size_t to);
+    Edge edge(std::size_t from, std::size_t to) const;
+    // Se a aresta não existir, retorna um Edge com destination = from e weight = -1.0
+
+    void add_edge(std::size_t from, std::size_t to, double weight = 1);
     void rem_edge(std::size_t from, std::size_t to);
 
-    std::vector<std::size_t> neighbors(std::size_t v) const;
+    std::vector<Edge> edgesFrom(std::size_t v) const;
 
     std::size_t order() const;
 
-private:
-    void add_edge_directed(std::size_t from, std::size_t to);
-    void rem_edge_directed(std::size_t from, std::size_t to);
+    std::vector<std::size_t> dijkstra(std::size_t from, std::size_t to) const;
 
+private:
+    void add_edge_directed(std::size_t from, std::size_t to, double weight);
+    void rem_edge_directed(std::size_t from, std::size_t to);
     void check_vertex(std::size_t) const;
 
-    std::vector<std::vector<std::size_t>> adj_list_;
+    std::vector<std::vector<Edge>> edge_list_;
 };
