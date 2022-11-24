@@ -27,7 +27,6 @@ bool Map::readMap(const std::string &tilesFile, const std::string &imageFile) {
     if (!backgroundImage_.loadFromFile(imageFile))
         return false;
     background_.setTexture(backgroundImage_);
-    background_.setScale(sf::Vector2f(2.f, 2.f));
     return true;
 }
 

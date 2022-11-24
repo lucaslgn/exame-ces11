@@ -7,10 +7,10 @@
 #include "Map.hpp"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(800, 1000), "Exam");
+	sf::RenderWindow window(sf::VideoMode(1200, 800), "Exam");
 	Player player(0, 0, 0, 0);
 	Map gameMap;
-	if (!gameMap.readMap("./data/map.txt", "./data/map.png"))
+	if (!gameMap.readMap("./data/map.txt", "./data/map.jpg"))
 		throw std::runtime_error{"couldn't load map"};
 
 	while (window.isOpen()) {
