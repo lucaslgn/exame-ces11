@@ -6,3 +6,4 @@
 bool pendingEvents(sf::Window&, sf::Event&);
 void treatEvents(sf::Window&, const sf::Event&, Player player);
 bool mouseClicked(const sf::Event&);
+bool saveButtonPressed();
