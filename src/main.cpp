@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include "Player.hpp"
 #include "Map.hpp"
+#include <thread>
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Exam");
@@ -22,6 +23,18 @@ int main() {
 		}
 		window.clear(sf::Color::Black);
 		window.draw(gameMap);
+		if (player.isWalking) {
+			while (!player.pathPoints.empty()) {
+				player.pos = player.pathPoints.front();
+				player.player_.setPosition(player.pos.x, player.pos.y);
+				player.pathPoints.pop();
+				window.clear();
+				window.draw(gameMap);
+				window.draw(player);
+				window.display();
+				std::this_thread::sleep_for(std::chrono::milliseconds(300));
+			}
+		}
 		window.draw(player);
 		window.display();
 	}

@@ -24,11 +24,9 @@ void Player::walk(const Map& gameMap) {
 	auto destinyVertex = gameMap.closestTile(destiny);
 	auto shortestPath = gameMap.shortestPath(currentVertex, destinyVertex);
 
-	for (const auto& vertex : shortestPath) {
-		pos = gameMap.tilePosition(vertex);
-		player_.setPosition(pos.x, pos.y);
-		//draw();
-	}
-	pos = gameMap.tilePosition(destinyVertex);
-	player_.setPosition(pos.x, pos.y);
+	for (const auto& vertex : shortestPath)
+		pathPoints.push(gameMap.tilePosition(vertex));
+
+	pathPoints.push(gameMap.tilePosition(destinyVertex));
+	isWalking = true;
 }
