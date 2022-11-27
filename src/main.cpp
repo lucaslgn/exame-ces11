@@ -8,10 +8,10 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Exam");
 	Map gameMap;
-	if (!gameMap.readMap("./data/map.txt", "./data/map.jpg"))
+	if (!gameMap.readMap("data/map.txt", "data/map.jpg"))
 		throw std::runtime_error{"couldn't load map"};
 	Player player;
-	if (!player.readPlayer("data/save", "data/zed.png", gameMap))
+	if (!player.readPlayer("data/save", "data/leona.png", gameMap))
 		throw std::runtime_error{"couldn't load save"};
 
 	while (window.isOpen()) {

@@ -8,14 +8,14 @@ bool Player::readPlayer(const std::string& saveFile, const std::string& imageFil
 	int x, y;
 	if (!(is >> x >> y))
 		return false;
-	auto index = gameMap.closestTile(Position{x, y});
+	auto index = gameMap.closestTile(sf::Vector2i{x, y});
 	pos = gameMap.tilePosition(index);
 
 	if (!playerImage_.loadFromFile(imageFile))
 		return false;
 	player_.setTexture(playerImage_);
 	player_.setPosition(pos.x, pos.y);
-	player_.setOrigin();
+	//player_.setOrigin();
 	return true;
 }
 void Player::walk(const Map& gameMap) {

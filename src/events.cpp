@@ -7,8 +7,7 @@ void treatEvents(sf::Window& window, const sf::Event& event, Player player, Map 
 	if (event.type == sf::Event::Closed) {
 		window.close();
 	} else if (mouseClicked(event)) {
-		player.destiny.x = sf::Mouse::getPosition(window).x;
-		player.destiny.y = sf::Mouse::getPosition(window).y;
+		player.destiny = sf::Mouse::getPosition(window);
 		player.walk(gameMap);
 	} else if (saveButtonPressed()) {
 		//TODO

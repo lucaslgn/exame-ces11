@@ -4,9 +4,6 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <fstream>
 
-struct Position {
-	int x, y;
-};
 
 class Player : public sf::Drawable {
 private:
@@ -17,6 +14,6 @@ private:
 public:
 	bool readPlayer(const std::string&, const std::string&, const Map&);
 	void walk(const Map&);
-	Position pos;
-	Position destiny;
+	sf::Vector2i pos;
+	sf::Vector2i destiny;
 };
