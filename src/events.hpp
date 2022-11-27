@@ -4,7 +4,7 @@
 #include "Player.hpp"
 #include "Map.hpp"
 
-bool pendingEvents(sf::Window& window, sf::Event& event);
+bool pendingEvents(sf::RenderWindow& window, sf::Event& event);
 void treatEvents(sf::Window& window, const sf::Event& event, Player& player, const Map& gameMap);
 bool mouseClicked(const sf::Event& event);
 bool saveButtonPressed();

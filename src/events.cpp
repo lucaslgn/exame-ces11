@@ -1,6 +1,6 @@
 #include "events.hpp"
 
-bool pendingEvents(sf::Window& window, sf::Event& event) {
+bool pendingEvents(sf::RenderWindow& window, sf::Event& event) {
 	return window.pollEvent(event);
 }
 void treatEvents(sf::Window& window, const sf::Event& event, Player& player, const Map& gameMap) {
