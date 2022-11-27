@@ -9,14 +9,15 @@
 class Player : public sf::Drawable {
 private:
 	sf::Texture playerImage_;
-
-    void draw(sf::RenderTarget&, sf::RenderStates) const override;
-public:
 	sf::Sprite player_;
-	bool readPlayer(const std::string&, const std::string&, const Map&);
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+public:
 	bool isWalking = false;
-	void walk(const Map&);
-	sf::Vector2i pos;
+	bool readPlayer(const std::string &saveFile, const std::string &imageFile, const Map &gameMap);
+	void walk(const Map& gameMap);
 	std::queue<sf::Vector2i> pathPoints;
+	void updatePosition();
+	sf::Vector2i pos;
 	sf::Vector2i destiny;
 };

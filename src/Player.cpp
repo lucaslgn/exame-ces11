@@ -30,3 +30,6 @@ void Player::walk(const Map& gameMap) {
 	pathPoints.push(gameMap.tilePosition(destinyVertex));
 	isWalking = true;
 }
+void Player::updatePosition() {
+	player_.setPosition(pos.x, pos.y);
+}
