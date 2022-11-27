@@ -2,10 +2,9 @@
 
 #include "Map.hpp"
 
-class Player : public sf::Drawable {
+class Player {
 public:
-	void draw(sf::RenderTarget&, sf::RenderStates) const override;
-	void walk(Map, sf::Window);
+	void walk(Map);
 	Position pos;
 	Position destiny;
 };

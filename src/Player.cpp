@@ -1,6 +1,6 @@
 #include "Player.hpp"
 
-void Player::walk(Map gameMap, sf::Window window) {
+void Player::walk(Map gameMap) {
 	auto currentVertex = gameMap.closestTile(pos);
 	auto destinyVertex = gameMap.closestTile(destiny);
 	auto shortestPath = gameMap.shortestPath(currentVertex, destinyVertex);
