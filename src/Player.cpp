@@ -14,7 +14,7 @@ bool Player::readPlayer(const std::string& saveFile, const std::string& imageFil
 	if (!playerImage_.loadFromFile(imageFile))
 		return false;
 	player_.setTexture(playerImage_);
-	player_.setPosition(pos.x, pos.y);
+	player_.setPosition(sf::Vector2f(pos));
 	auto size = playerImage_.getSize();
 	player_.setOrigin(size.x * 0.68, size.y);
 	return true;
@@ -31,5 +31,5 @@ void Player::walk(const Map& gameMap) {
 	isWalking = true;
 }
 void Player::updatePosition() {
-	player_.setPosition(pos.x, pos.y);
+	player_.setPosition(sf::Vector2f(pos));
 }
