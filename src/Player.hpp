@@ -5,6 +5,6 @@
 class Player {
 public:
 	void walk(Map);
-	Position pos;
-	Position destiny;
+    sf::Vector2i pos;
+    sf::Vector2i destiny;
 };
