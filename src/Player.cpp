@@ -27,4 +27,6 @@ void Player::walk(const Map& gameMap) {
 		pos = gameMap.tilePosition(vertex);
 		player_.setPosition(pos.x, pos.y);
 	}
+	pos = gameMap.tilePosition(destinyVertex);
+	player_.setPosition(pos.x, pos.y);
 }
