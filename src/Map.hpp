@@ -2,6 +2,8 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
+#include <cmath>
 #include "SFML/Graphics.hpp"
 #include "graphList.hpp"
 

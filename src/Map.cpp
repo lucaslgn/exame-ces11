@@ -1,6 +1,4 @@
 #include "Map.hpp"
-#include <fstream>
-#include <cmath>
 
 double distance(Position pos1, Position pos2) {
     auto deltax = pos1.x - pos2.x;
