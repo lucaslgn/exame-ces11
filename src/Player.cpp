@@ -15,7 +15,8 @@ bool Player::readPlayer(const std::string& saveFile, const std::string& imageFil
 		return false;
 	player_.setTexture(playerImage_);
 	player_.setPosition(pos.x, pos.y);
-	//player_.setOrigin();
+	auto size = playerImage_.getSize();
+	player_.setOrigin(size.x * 0.68, size.y);
 	return true;
 }
 void Player::walk(const Map& gameMap) {
@@ -26,6 +27,7 @@ void Player::walk(const Map& gameMap) {
 	for (const auto& vertex : shortestPath) {
 		pos = gameMap.tilePosition(vertex);
 		player_.setPosition(pos.x, pos.y);
+		//draw();
 	}
 	pos = gameMap.tilePosition(destinyVertex);
 	player_.setPosition(pos.x, pos.y);
