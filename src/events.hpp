@@ -1,5 +1,7 @@
 #pragma once
 
+#include <fstream>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
 #include "Map.hpp"
@@ -9,3 +11,4 @@ void treatEvents(sf::Window& window, const sf::Event& event, Player& player, con
 bool mouseClicked(const sf::Event& event);
 bool saveButtonPressed();
 void updateWindow(sf::RenderWindow& window, const Map& gameMap, const Player& player);
+void saveGame(const std::string& nameFile, const Player& player);

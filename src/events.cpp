@@ -10,8 +10,7 @@ void treatEvents(sf::Window& window, const sf::Event& event, Player& player, con
 		player.destiny = sf::Mouse::getPosition(window);
 		player.walk(gameMap);
 	} else if (saveButtonPressed()) {
-		//TODO
-		//save game
+		saveGame("data/save", player);
 	}
 }
 bool mouseClicked(const sf::Event& event) {
@@ -25,4 +24,9 @@ void updateWindow(sf::RenderWindow& window, const Map& gameMap, const Player& pl
 	window.draw(gameMap);
 	window.draw(player);
 	window.display();
+}
+void saveGame(const std::string& nameFile, const Player& player) {
+	std::ofstream os(nameFile);
+
+	os << player.pos.x << ' ' << player.pos.y;
 }
