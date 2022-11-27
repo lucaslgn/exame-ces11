@@ -1,6 +1,6 @@
 #include "Map.hpp"
 
-double distance(sf::Vector2i pos1, sf::Vector2i pos2) {
+double distance(const sf::Vector2i &pos1, const sf::Vector2i &pos2) {
     auto deltax = pos1.x - pos2.x;
     auto deltay = pos1.y - pos2.y;
     return std::sqrt(deltax * deltax + deltay * deltay);
@@ -36,9 +36,9 @@ void Map::drawEdges(sf::RenderTarget &target, sf::RenderStates states) const {
                 break;
             auto neighbor = tiles_[edge.destination];
             sf::VertexArray line(sf::Lines, 2);
-            line[0].position = sf::Vector2f(tile.x, tile.y);
+            line[0].position = sf::Vector2f(tile);
             line[0].color = sf::Color::Red;
-            line[1].position = sf::Vector2f(neighbor.x, neighbor.y);
+            line[1].position = sf::Vector2f(neighbor);
             line[1].color = sf::Color::Red;
             target.draw(line, states);
         }
@@ -62,7 +62,7 @@ void Map::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     drawTiles(target, states);
 }
 
-std::size_t Map::closestTile(sf::Vector2i pos) const {
+std::size_t Map::closestTile(const sf::Vector2i &pos) const {
     double minDistance = std::numeric_limits<double>::max();
     std::size_t closestIndex = tilesGraph_.order();
     for (std::size_t tileIndex = 0; tileIndex < tilesGraph_.order(); ++tileIndex) {
@@ -78,10 +78,10 @@ std::size_t Map::closestTile(sf::Vector2i pos) const {
     throw std::runtime_error("invalid closest tile"); // Acontece quando tiles_ está vazio, por exemplo
 }
 
-sf::Vector2i Map::tilePosition(std::size_t tileIndex) const {
+sf::Vector2i Map::tilePosition(const std::size_t &tileIndex) const {
     return tiles_[tileIndex];
 }
 
-std::vector<std::size_t> Map::shortestPath(std::size_t from, std::size_t to) const {
+std::vector<std::size_t> Map::shortestPath(const std::size_t &from, const std::size_t &to) const {
     return tilesGraph_.dijkstra(from, to);
 }
