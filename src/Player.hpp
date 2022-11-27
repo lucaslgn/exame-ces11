@@ -1,11 +1,11 @@
 #pragma once
 
-class Player {
+#include "Map.hpp"
+
+class Player : public sf::Drawable {
 public:
-	Player(int, int, int, int);
-	void walk(int, int);
-private:
-	int x, y;
-	int vX, vY;
-	bool isWalking = false;
+	void draw(sf::RenderTarget&, sf::RenderStates) const override;
+	void walk(Map, sf::Window);
+	Position pos;
+	Position destiny;
 };

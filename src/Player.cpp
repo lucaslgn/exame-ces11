@@ -1,15 +1,11 @@
 #include "Player.hpp"
 
-Player::Player(int x, int y, int vX, int vY) {
-	this->x = x;
-	this->y = y;
-	this->vX = vX;
-	this->vY = vY;
-}
+void Player::walk(Map gameMap, sf::Window window) {
+	auto currentVertex = gameMap.closestTile(pos);
+	auto destinyVertex = gameMap.closestTile(destiny);
+	auto shortestPath = gameMap.shortestPath(currentVertex, destinyVertex);
 
-void Player::walk(int x, int y) {
-	isWalking = true;
-	while (isWalking) {
-		//TODO
+	for (const auto& vertex : shortestPath) {
+		pos = gameMap.tilePosition(vertex);
 	}
 }
