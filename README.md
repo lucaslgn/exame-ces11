@@ -1,17 +1,11 @@
 # Compilation
 
-The project was developed with the possibilities of using CMake or just a Makefile to compile it. In order to do that, choose one of the possibilities and execute the command specified.
-
-## Makefile
-
-Type the command `make all` in the root of the project.
-
-## CMake
-
-Run the script `install.sh` with the command `./install.sh` in the root of the project.
-
-P.S.: The CMakeLists.txt file was made only for the use of graphics, window and system modules. If the script doesn't have permission to be executed, run the command `chmod u+x install.sh`.
+Type the command `make all` in the root of the project to compile the game, make sure the machine has a recent version of `Make`.
 
 # Running
 
 Run the binary `Exam` with the command `./Exam` or run the command `make run` in the root of the project.
+
+# Abstract data types used in source code
+
+The source code relies on graphs for representing the connections between different places in the map, the graph is represented with a weighted adjacency list (the weights are the distances in pixels). Character movement is determined using dijkstra algorithm implemented with priority queue.
