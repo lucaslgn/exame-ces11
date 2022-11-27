@@ -1,5 +1,11 @@
+#pragma once
+
 #include <vector>
 #include <stack>
+#include <algorithm>
+#include <stdexcept>
+#include <queue>
+#include <limits>
 
 // Lista de adjacências
 // Sem arestas múltiplas
@@ -12,24 +18,25 @@ struct Edge {
 
 class Graph {
 public:
-    Graph(std::size_t n);
+    Graph();
+    Graph(const std::size_t &n);
 
-    Edge edge(std::size_t from, std::size_t to) const;
+    Edge edge(const std::size_t &from, const std::size_t &to) const;
     // Se a aresta não existir, retorna um Edge com destination = from e weight = -1.0
 
-    void add_edge(std::size_t from, std::size_t to, double weight = 1);
-    void rem_edge(std::size_t from, std::size_t to);
+    void add_edge(const std::size_t &from, const std::size_t &to, const double &weight = 1);
+    void rem_edge(const std::size_t &from, const std::size_t &to);
 
-    std::vector<Edge> edgesFrom(std::size_t v) const;
+    std::vector<Edge> edgesFrom(const std::size_t &v) const;
 
     std::size_t order() const;
 
-    std::vector<std::size_t> dijkstra(std::size_t from, std::size_t to) const;
+    std::vector<std::size_t> dijkstra(const std::size_t &from, const std::size_t &to) const;
 
 private:
-    void add_edge_directed(std::size_t from, std::size_t to, double weight);
-    void rem_edge_directed(std::size_t from, std::size_t to);
-    void check_vertex(std::size_t) const;
+    void add_edge_directed(const std::size_t &from, const std::size_t &to, const double &weight);
+    void rem_edge_directed(const std::size_t &from, const std::size_t &to);
+    void check_vertex(const std::size_t &v) const;
 
     std::vector<std::vector<Edge>> edge_list_;
 };

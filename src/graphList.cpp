@@ -1,20 +1,17 @@
 #include "graphList.hpp"
 
-#include <algorithm>
-#include <stdexcept>
-#include <queue>
-#include <limits>
+Graph::Graph() {}
 
-Graph::Graph(std::size_t n) :
+Graph::Graph(const std::size_t &n) :
         edge_list_(n) {}
 
-bool compareDestinations(Edge a, Edge b) {
+bool compareDestinations(const Edge &a, const Edge &b) {
     if (a.destination < b.destination)
         return true;
     return false;
 }
 
-Edge Graph::edge(std::size_t from, std::size_t to) const {
+Edge Graph::edge(const std::size_t &from, const std::size_t &to) const {
     check_vertex(from);
     check_vertex(to);
     Edge tempEdge = {to, 1}; // O peso da aresta não importa para a comparação
@@ -28,17 +25,17 @@ Edge Graph::edge(std::size_t from, std::size_t to) const {
     return {from, -1.0};
 }
 
-void Graph::add_edge(std::size_t from, std::size_t to, double weight) {
+void Graph::add_edge(const std::size_t &from, const std::size_t &to, const double &weight) {
     add_edge_directed(from, to, weight);
     add_edge_directed(to, from, weight);
 }
 
-void Graph::rem_edge(std::size_t from, std::size_t to) {
+void Graph::rem_edge(const std::size_t &from, const std::size_t &to) {
     rem_edge_directed(from, to);
     rem_edge_directed(to, from);
 }
 
-std::vector<Edge> Graph::edgesFrom(std::size_t v) const {
+std::vector<Edge> Graph::edgesFrom(const std::size_t &v) const {
     check_vertex(v);
     return edge_list_[v];
 }
@@ -47,7 +44,7 @@ std::size_t Graph::order() const {
     return edge_list_.size();
 }
 
-std::vector<std::size_t> Graph::dijkstra(std::size_t from, std::size_t to) const {
+std::vector<std::size_t> Graph::dijkstra(const std::size_t &from, const std::size_t &to) const {
     std::vector<std::size_t> previous(order(), order()); // φ = order()
     std::vector<double> distances(order(), std::numeric_limits<double>::max());
     std::vector<bool> visited(order(), false);
@@ -88,7 +85,7 @@ std::vector<std::size_t> Graph::dijkstra(std::size_t from, std::size_t to) const
     return result;
 }
 
-void Graph::add_edge_directed(std::size_t from, std::size_t to, double weight) {
+void Graph::add_edge_directed(const std::size_t &from, const std::size_t &to, const double &weight) {
     check_vertex(from);
     check_vertex(to);
     Edge newEdge = {to, weight}; // O peso da aresta não importa para a comparação
@@ -105,7 +102,7 @@ void Graph::add_edge_directed(std::size_t from, std::size_t to, double weight) {
     edge_list_[from].insert(lb, newEdge);
 }
 
-void Graph::rem_edge_directed(std::size_t from, std::size_t to) {
+void Graph::rem_edge_directed(const std::size_t &from, const std::size_t &to) {
     check_vertex(from);
     check_vertex(to);
     Edge tempEdge = {to, 1}; // O peso da aresta não importa para a comparação
@@ -121,7 +118,7 @@ void Graph::rem_edge_directed(std::size_t from, std::size_t to) {
     edge_list_[from].erase(lb);
 }
 
-void Graph::check_vertex(std::size_t v) const {
+void Graph::check_vertex(const std::size_t &v) const {
     if (v >= order()) {
         throw std::out_of_range{"vertex does not exist"};
     }
