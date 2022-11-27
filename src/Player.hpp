@@ -4,6 +4,10 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <fstream>
 
+struct Position {
+	int x, y;
+};
+
 class Player : public sf::Drawable {
 private:
 	sf::Texture playerImage_;

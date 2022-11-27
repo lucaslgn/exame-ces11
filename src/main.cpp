@@ -14,7 +14,6 @@ int main() {
 	if (!player.readPlayer("data/save", "data/zed.png", gameMap))
 		throw std::runtime_error{"couldn't load save"};
 
-
 	while (window.isOpen()) {
 		sf::Event event;
 		
