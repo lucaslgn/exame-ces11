@@ -21,21 +21,15 @@ int main() {
 		while (pendingEvents(window, event)) {
 			treatEvents(window, event, player, gameMap);
 		}
-		window.clear(sf::Color::Black);
-		window.draw(gameMap);
 		if (player.isWalking) {
 			while (!player.pathPoints.empty()) {
 				player.pos = player.pathPoints.front();
-				player.player_.setPosition(player.pos.x, player.pos.y);
+				player.updatePosition();
 				player.pathPoints.pop();
-				window.clear();
-				window.draw(gameMap);
-				window.draw(player);
-				window.display();
+				updateWindow(window, gameMap, player);
 				std::this_thread::sleep_for(std::chrono::milliseconds(300));
 			}
 		}
-		window.draw(player);
-		window.display();
+		updateWindow(window, gameMap, player);
 	}
 }

@@ -20,3 +20,9 @@ bool mouseClicked(const sf::Event& event) {
 bool saveButtonPressed() {
 	return sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl);
 }
+void updateWindow(sf::RenderWindow& window, const Map& gameMap, const Player& player) {
+	window.clear(sf::Color::Black);
+	window.draw(gameMap);
+	window.draw(player);
+	window.display();
+}
