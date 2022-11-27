@@ -1,10 +1,10 @@
-#include "events.hpp"
+#include <thread>
+#include <stdexcept>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include <stdexcept>
+#include "events.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
-#include <thread>
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Exam");

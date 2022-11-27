@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <cmath>
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #include "graphList.hpp"
 
 double distance(const sf::Vector2i &pos1, const sf::Vector2i &pos2);
