@@ -3,7 +3,7 @@
 bool pendingEvents(sf::Window& window, sf::Event& event) {
 	return window.pollEvent(event);
 }
-void treatEvents(sf::Window& window, const sf::Event& event, Player player, Map gameMap) {
+void treatEvents(sf::Window& window, const sf::Event& event, Player& player, const Map& gameMap) {
 	if (event.type == sf::Event::Closed) {
 		window.close();
 	} else if (mouseClicked(event)) {
