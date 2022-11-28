@@ -8,6 +8,7 @@
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Exam");
+	window.setFramerateLimit(60);
 	Map gameMap;
 	if (!gameMap.readMap("data/map.txt", "data/map.jpg"))
 		throw std::runtime_error{"couldn't load map"};
@@ -27,7 +28,7 @@ int main() {
 				player.updatePosition();
 				player.pathPoints.pop();
 				updateWindow(window, gameMap, player);
-				std::this_thread::sleep_for(std::chrono::milliseconds(300));
+				std::this_thread::sleep_for(std::chrono::milliseconds(200));
 			}
 		}
 		updateWindow(window, gameMap, player);
