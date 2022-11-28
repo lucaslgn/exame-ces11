@@ -24,7 +24,7 @@ public:
     std::size_t closestTile(const sf::Vector2i &pos) const;
     sf::Vector2i tilePosition(const std::size_t &tileIndex) const;
 
-    bool readMap(const std::string &tilesFile, const std::string &imageFile);
+    void loadMap(const std::string &tilesFile, const std::string &imageFile);
 
     std::vector<std::size_t> shortestPath(const std::size_t &from, const std::size_t &to) const;
 };

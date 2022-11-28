@@ -4,7 +4,7 @@ Type the command `make all` in the root of the project to compile the game, make
 
 # Running
 
-Run the binary `Exam` with the command `./Exam` or run the command `make run` in the root of the project.
+Run the binary `Exam` with the command `./Exam` or run the command `make run` in the root of the project. To save the game press `ctrl` + `s`.
 
 # Abstract data types used in source code
 

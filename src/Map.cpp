@@ -6,26 +6,27 @@ double distance(const sf::Vector2i &pos1, const sf::Vector2i &pos2) {
     return std::sqrt(deltax * deltax + deltay * deltay);
 }
 
-bool Map::readMap(const std::string &tilesFile, const std::string &imageFile) {
+void Map::loadMap(const std::string &tilesFile, const std::string &imageFile) {
+    // Load tiles information
     std::ifstream is(tilesFile);
     std::size_t order;
     if (!(is >> order))
-        return false;
+        throw std::runtime_error{"couldn't load map"};
     tilesGraph_ = Graph(order);
     tiles_.resize(order);
     for (auto &tile: tiles_) {
         if (!(is >> tile.x >> tile.y))
-            return false;
+            throw std::runtime_error{"couldn't load map"};
     }
     std::size_t from, to;
     while (is >> from >> to) {
         tilesGraph_.add_edge(from, to, distance(tiles_[from], tiles_[to]));
     }
 
+    // Load background image
     if (!backgroundImage_.loadFromFile(imageFile))
-        return false;
+        throw std::runtime_error{"couldn't load map"};
     background_.setTexture(backgroundImage_);
-    return true;
 }
 
 void Map::drawEdges(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -50,8 +51,9 @@ void Map::drawTiles(sf::RenderTarget &target, sf::RenderStates states) const {
     sf::CircleShape circle(radius);
     circle.setOutlineThickness(1.f);
     circle.setFillColor(sf::Color(50, 100, 150));
+    circle.setOrigin(radius, radius);
     for (const auto &tile: tiles_) {
-        circle.setPosition(tile.x - radius, tile.y - radius);
+        circle.setPosition(sf::Vector2f(tile));
         target.draw(circle, states);
     }
 }
@@ -75,7 +77,7 @@ std::size_t Map::closestTile(const sf::Vector2i &pos) const {
     if (closestIndex < tilesGraph_.order()) {
         return closestIndex;
     }
-    throw std::runtime_error("invalid closest tile"); // Acontece quando tiles_ está vazio, por exemplo
+    throw std::runtime_error("invalid closest tile");
 }
 
 sf::Vector2i Map::tilePosition(const std::size_t &tileIndex) const {
