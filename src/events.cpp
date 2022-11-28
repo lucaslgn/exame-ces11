@@ -9,15 +9,15 @@ void treatEvents(sf::Window& window, const sf::Event& event, Player& player, con
 	} else if (mouseClicked(event)) {
 		player.destiny = sf::Mouse::getPosition(window);
 		player.walk(gameMap);
-	} else if (saveButtonPressed()) {
+	} else if (saveButtonPressed(event)) {
 		saveGame("data/save", player);
 	}
 }
 bool mouseClicked(const sf::Event& event) {
 	return (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left);
 }
-bool saveButtonPressed() {
-	return sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl);
+bool saveButtonPressed(const sf::Event &event) {
+	return event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::S && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl);
 }
 void updateWindow(sf::RenderWindow& window, const Map& gameMap, const Player& player) {
 	window.clear(sf::Color::Black);
