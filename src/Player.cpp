@@ -24,10 +24,10 @@ void Player::walk(const Map& gameMap) {
     }
 	auto currentVertex = gameMap.closestTile(pos);
 	auto destinyVertex = gameMap.closestTile(destiny);
-	auto shortestPath = gameMap.shortestPath(currentVertex, destinyVertex);
+	auto path = gameMap.shortestPath(currentVertex, destinyVertex);
 
-	for (const auto& vertex : shortestPath)
-		pathPoints.push(gameMap.tilePosition(vertex));
+	for (auto tileIter = std::next(path.begin()); tileIter != path.end(); ++tileIter) // path starts with pos, which can be skipped
+		pathPoints.push(gameMap.tilePosition(*tileIter));
 
 	pathPoints.push(gameMap.tilePosition(destinyVertex));
 }
