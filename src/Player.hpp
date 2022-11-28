@@ -10,8 +10,8 @@ private:
 	sf::Texture playerImage_;
 	sf::Sprite player_;
 
-    std::queue<sf::Vector2i> pathPoints;
-    float deltaTime;
+    std::queue<sf::Vector2i> pathPoints = {};
+    float deltaTime = 0.0f;
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 public:
